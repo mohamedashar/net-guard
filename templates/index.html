@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#ffffff;
+    color:#111;
+}
+
+/* ================= HEADER ================= */
+.header{
+    background:#fff;
+    padding:22px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 15px rgba(0,0,0,0.06);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#000;
+}
+
+.logo span{
+    color:#e11d48;
+}
+
+/* ================= MENU ================= */
+.menu{
+    display:flex;
+    gap:25px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:6px;
+    transition:.3s;
+}
+
+.menu a:hover{
+    background:#e11d48;
+    color:white;
+}
+
+/* ================= HERO ================= */
+.hero{
+    text-align:center;
+    padding:70px 20px 40px 20px;
+}
+
+.hero h1{
+    font-size:60px;
+    font-weight:700;
+    color:#000;
+}
+
+.hero h1 span{
+    color:#e11d48;
+}
+
+.hero p{
+    margin-top:15px;
+    color:#555;
+    font-size:16px;
+}
+
+/* ================= STATS ================= */
+.stats{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.stat{
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    border:1px solid #eee;
+    box-shadow:0 8px 20px rgba(0,0,0,0.05);
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-5px);
+    border-color:#e11d48;
+}
+
+.stat h2{
+    font-size:32px;
+    color:#e11d48;
+    margin-bottom:5px;
+}
+
+.stat p{
+    font-size:13px;
+    letter-spacing:1px;
+    color:#666;
+}
+
+/* ================= SECTION TITLE ================= */
+.section-title{
+    text-align:center;
+    margin:60px 0 10px 0;
+    font-size:34px;
+    font-weight:700;
+}
+
+.section-title span{
+    color:#e11d48;
+}
+
+.section-sub{
+    text-align:center;
+    color:#555;
+    margin-bottom:30px;
+}
+
+/* ================= FEATURES ================= */
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:0 auto 60px auto;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:14px;
+    padding:25px;
+    border:1px solid #eee;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#e11d48;
+    box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+.icon{
+    width:55px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    margin-bottom:15px;
+    font-size:22px;
+    color:white;
+    background:#e11d48;
+}
+
+.card h3{
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+.card p{
+    font-size:14px;
+    color:#555;
+    line-height:1.6;
+}
+
+/* ================= FOOTER ================= */
+.footer{
+    background:#000;
+    color:#aaa;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/adminlogin">ADMIN</a>
+        <a href="/UserLogin">STAFF LOGIN</a>
+        <a href="/Datauser">STUDENT LOGIN</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>NET<span>GUARD</span></h1>
+    <p>Enterprise Secure File Storage & Advanced Protection Platform</p>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stat">
+        <h2>256</h2>
+        <p>BIT ENCRYPTION</p>
+    </div>
+    <div class="stat">
+        <h2>99.9%</h2>
+        <p>UPTIME</p>
+    </div>
+    <div class="stat">
+        <h2>24/7</h2>
+        <p>MONITORING</p>
+    </div>
+    <div class="stat">
+        <h2>100%</h2>
+        <p>SECURE</p>
+    </div>
+</div>
+
+<!-- FEATURES TITLE -->
+<div class="section-title">
+    Advanced <span>Security Features</span>
+</div>
+<div class="section-sub">
+    Comprehensive cloud storage solution with enterprise-level security
+</div>
+
+<!-- FEATURES -->
+<div class="container">
+    <div class="features">
+
+        <div class="card">
+            <div class="icon"><i class="fas fa-lock"></i></div>
+            <h3>ECC Encryption</h3>
+            <p>
+                Military-grade encryption ensures every file is protected.
+                Unique keys maximize confidentiality.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class="fas fa-shield-halved"></i></div>
+            <h3>Access Control</h3>
+            <p>
+                Owners manage permissions, approvals,
+                and maintain strict data integrity.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class="fas fa-user-secret"></i></div>
+            <h3>Attacker Detection</h3>
+            <p>
+                Real-time monitoring, IP tracking, and alerts
+                identify unauthorized access attempts.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class="fas fa-key"></i></div>
+            <h3>Key Management</h3>
+            <p>
+                Automated generation and secure delivery
+                ensures only authorized access.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class="fas fa-envelope"></i></div>
+            <h3>Email Notifications</h3>
+            <p>
+                Instant alerts for uploads, approvals,
+                and important security events.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class="fas fa-file-shield"></i></div>
+            <h3>File Integrity</h3>
+            <p>
+                Modification tracking and timestamp verification
+                prevent tampering.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 NETGUARD – Security Operations
+</div>
+
+</body>
+</html>

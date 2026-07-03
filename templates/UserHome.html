@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Staff Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#ffffff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+.logo span{ color:#d32f2f; }
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    font-weight:600;
+    color:#222;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* HERO */
+.hero{
+    width:95%;
+    max-width:1200px;
+    margin:30px auto;
+    background:linear-gradient(120deg,#0b3d91,#1e40af);
+    color:white;
+    padding:30px;
+    border-radius:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.hero h1{
+    font-size:28px;
+}
+
+.hero p{
+    font-size:14px;
+    opacity:.9;
+    margin-top:4px;
+}
+
+.staff-badge{
+    background:white;
+    color:#0b3d91;
+    padding:8px 16px;
+    border-radius:25px;
+    font-weight:700;
+    font-size:13px;
+}
+
+/* PROFILE */
+.profile{
+    width:95%;
+    max-width:1200px;
+    margin:20px auto;
+    background:#ffffff;
+    padding:25px;
+    border-radius:16px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    border:1px solid #eee;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.profile div{
+    font-size:14px;
+}
+
+.profile b{
+    display:block;
+    color:#0b3d91;
+    font-size:12px;
+    margin-bottom:4px;
+}
+
+/* ACTION CARDS */
+.actions{
+    width:95%;
+    max-width:1200px;
+    margin:30px auto 60px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+}
+
+.card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    border:1px solid #eee;
+    box-shadow:0 12px 30px rgba(0,0,0,0.07);
+    transition:.3s;
+    text-align:center;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#0b3d91;
+}
+
+.icon{
+    width:65px;
+    height:65px;
+    margin:auto;
+    margin-bottom:15px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#0b3d91,#1e88e5);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.card p{
+    font-size:13px;
+    color:#555;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+/* ================= NOTIFICATION SYSTEM ================= */
+
+.notification-container{
+    width:95%;
+    max-width:900px;
+    margin:20px auto;
+}
+
+.notification{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border-radius:10px;
+    margin-bottom:12px;
+    font-weight:600;
+    animation:slideDown .4s ease;
+}
+
+/* success */
+.notification.success{
+    background:#dcfce7;
+    color:#166534;
+    border-left:6px solid #22c55e;
+}
+
+/* warning */
+.notification.warning{
+    background:#fef9c3;
+    color:#854d0e;
+    border-left:6px solid #eab308;
+}
+
+/* error */
+.notification.danger{
+    background:#fee2e2;
+    color:#991b1b;
+    border-left:6px solid #ef4444;
+}
+
+/* close button */
+.close-btn{
+    background:none;
+    border:none;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    color:inherit;
+}
+
+/* animation */
+@keyframes slideDown{
+    from{
+        transform:translateY(-15px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/userhome">Dashboard</a>
+        <a href="/fileupload">Upload Material</a>
+        <a href="/viewfile">View Materials</a>
+        <a href="/userrequest">Student Requests</a>
+        <a href="/accepted_users">Approved Students</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<!-- Notification Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="notification-container">
+      {% for category, message in messages %}
+        <div class="notification {{ category }}">
+            <span>{{ message }}</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="hero">
+    <div>
+        <h1><i class="fas fa-user-tie"></i> Staff Dashboard</h1>
+        <p>Manage and share academic study materials securely</p>
+    </div>
+    <div class="staff-badge">
+        Faculty Member
+    </div>
+</div>
+
+{% for item in data %}
+<div class="profile">
+    <div>
+        <b>Name</b>
+        {{item[1]}}
+    </div>
+
+    <div>
+        <b>Department</b>
+        {{item[2]}}
+    </div>
+
+    <!-- <div>
+        <b>Department</b>
+        {{item[3]}}
+    </div> -->
+
+    <div>
+        <b>Email</b>
+        {{item[4]}}
+    </div>
+
+    <div>
+        <b>Staff ID</b>
+        {{item[5]}}
+    </div>
+</div>
+{% endfor %}
+
+<div class="actions">
+
+    <a href="/fileupload" style="text-decoration:none;color:inherit;">
+    <div class="card">
+        <div class="icon"><i class="fas fa-upload"></i></div>
+        <h3>Upload Study Materials</h3>
+        <p>Upload lecture notes, assignments and resources</p>
+    </div>
+    </a>
+
+    <a href="/viewfile" style="text-decoration:none;color:inherit;">
+    <div class="card">
+        <div class="icon"><i class="fas fa-folder-open"></i></div>
+        <h3>Manage Materials</h3>
+        <p>Edit or remove uploaded materials</p>
+    </div>
+    </a>
+
+    <a href="/userrequest" style="text-decoration:none;color:inherit;">
+    <div class="card">
+        <div class="icon"><i class="fas fa-user-check"></i></div>
+        <h3>Student Access Requests</h3>
+        <p>Approve or reject student access</p>
+    </div>
+    </a>
+
+    <a href="/accepted_users" style="text-decoration:none;color:inherit;">
+    <div class="card">
+        <div class="icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>Access Control</h3>
+        <p>Monitor authorized student users</p>
+    </div>
+    </a>
+
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

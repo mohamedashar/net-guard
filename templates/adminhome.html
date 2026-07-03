@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD - Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+    color:#0b3d91;
+}
+.logo span{ color:#d32f2f; }
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#222;
+    font-weight:600;
+    transition:.3s;
+}
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* HERO */
+.hero{
+    width:95%;
+    max-width:1200px;
+    margin:30px auto 15px auto;
+    background:linear-gradient(120deg,#0b3d91,#1e40af);
+    color:white;
+    padding:30px;
+    border-radius:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.1);
+}
+
+.hero h1{
+    font-size:26px;
+}
+
+.badge{
+    background:white;
+    color:#0b3d91;
+    padding:8px 16px;
+    border-radius:25px;
+    font-weight:600;
+    font-size:13px;
+}
+
+/* STATS */
+.stats{
+    width:95%;
+    max-width:1200px;
+    margin:10px auto 30px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.stat{
+    background:#fff;
+    padding:22px;
+    border-radius:16px;
+    border:1px solid #eee;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+    text-align:center;
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.1);
+}
+
+.stat i{
+    font-size:22px;
+    color:#0b3d91;
+    margin-bottom:10px;
+}
+
+.stat h2{
+    font-size:26px;
+    color:#0b3d91;
+}
+
+.stat p{
+    font-size:14px;
+    color:#555;
+}
+
+/* SECTION */
+.section-title{
+    width:95%;
+    max-width:1200px;
+    margin:20px auto 10px auto;
+    font-size:20px;
+    font-weight:700;
+    color:#0b3d91;
+}
+
+/* CARD GRID */
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:10px auto 50px auto;
+}
+
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    padding:22px;
+    border-radius:16px;
+    border:1px solid #eee;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+    display:flex;
+    flex-direction:column;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 25px 45px rgba(0,0,0,0.12);
+}
+
+.card h3{
+    color:#0b3d91;
+    margin-bottom:12px;
+}
+
+.info{
+    font-size:14px;
+    margin:6px 0;
+    color:#444;
+}
+
+/* DELETE BUTTON */
+.delete-btn{
+    margin-top:auto;
+    text-align:center;
+    background:#d32f2f;
+    color:white;
+    padding:9px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.delete-btn:hover{
+    background:#b71c1c;
+    box-shadow:0 8px 20px rgba(211,47,47,0.3);
+}
+
+/* FOOTER */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/AdminHome">Dashboard</a>
+        <a href="/userfile">Staff Materials</a>
+        <a href="/userdetails">Student Details</a>
+        <a href="/viewattack">Security Logs</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<div class="hero">
+    <h1><i class="fas fa-gauge"></i> Academic Admin Dashboard</h1>
+    <div class="badge">
+        <i class="fas fa-shield"></i> System Administrator
+    </div>
+</div>
+
+<div class="stats">
+    <div class="stat">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h2>{{ staff_total }}</h2>
+        <p>Total Staff Members</p>
+    </div>
+
+    <div class="stat">
+        <i class="fas fa-user-graduate"></i>
+        <h2>{{ user_total }}</h2>
+        <p>Total Registered Students</p>
+    </div>
+
+    <!-- <div class="stat">
+        <i class="fas fa-circle-check"></i>
+        <h2 style="color:#16a34a;">Active</h2>
+        <p>System Status</p>
+    </div> -->
+</div>
+
+<div class="section-title">Registered Staff Members</div>
+
+<div class="container">
+    <div class="card-grid">
+        {% for item in data %}
+        <div class="card">
+            <h3><i class="fas fa-user-tie"></i> {{item[1]}}</h3>
+
+            <div class="info"><b>ID:</b> {{item[0]}}</div>
+            <div class="info"><b>Department:</b> {{item[2]}}</div>
+            <!-- <div class="info"><b>Register No:</b> {{item[3]}}</div> -->
+            <div class="info"><b>Email:</b> {{item[4]}}</div>
+            <!-- <div class="info"><b>Email:</b> {{item[5]}}</div> -->
+
+            <a class="delete-btn"
+               href="/delete_owner?id={{item[0]}}"
+               onclick="return confirm('Delete this staff member?')">
+               Remove
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

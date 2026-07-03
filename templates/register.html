@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Staff Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+.logo span{ color:#d32f2f; }
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+.menu a{
+    text-decoration:none;
+    font-weight:600;
+    color:#222;
+    transition:.3s;
+}
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* CONTAINER */
+.container{
+    width:95%;
+    max-width:650px;
+    margin:50px auto;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.08);
+    border:1px solid #eee;
+    transition:.3s;
+}
+
+.container:hover{
+    transform:translateY(-6px);
+    box-shadow:0 35px 80px rgba(0,0,0,0.12);
+}
+
+.title{
+    text-align:center;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:25px;
+    color:#0b3d91;
+}
+
+/* INPUT */
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-group label{
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:6px;
+    display:block;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#0b3d91;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    padding:12px 12px 12px 40px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    outline:none;
+    transition:.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus{
+    border-color:#0b3d91;
+    box-shadow:0 0 0 3px rgba(11,61,145,0.15);
+}
+
+/* OTP */
+.otp-row{
+    display:flex;
+    gap:10px;
+}
+
+.otp-btn{
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    color:white;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.success{ color:green; font-size:13px; margin-top:6px; }
+.error{ color:red; font-size:13px; margin-top:6px; }
+
+/* BUTTONS */
+.btn-group{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:15px;
+}
+
+.reset-btn{
+    background:#94a3b8;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.submit-btn{
+    background:#94a3b8;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:not-allowed;
+    font-weight:700;
+}
+
+.submit-btn.enabled{
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    cursor:pointer;
+}
+
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+/* ================= NOTIFICATION SYSTEM ================= */
+
+.notification-container{
+    width:95%;
+    max-width:900px;
+    margin:20px auto;
+}
+
+.notification{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border-radius:10px;
+    margin-bottom:12px;
+    font-weight:600;
+    animation:slideDown .4s ease;
+}
+
+/* success */
+.notification.success{
+    background:#dcfce7;
+    color:#166534;
+    border-left:6px solid #22c55e;
+}
+
+/* warning */
+.notification.warning{
+    background:#fef9c3;
+    color:#854d0e;
+    border-left:6px solid #eab308;
+}
+
+/* error */
+.notification.danger{
+    background:#fee2e2;
+    color:#991b1b;
+    border-left:6px solid #ef4444;
+}
+
+/* close button */
+.close-btn{
+    background:none;
+    border:none;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    color:inherit;
+}
+
+/* animation */
+@keyframes slideDown{
+    from{
+        transform:translateY(-15px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/adminlogin">ADMIN</a>
+        <a href="/UserLogin">STAFF LOGIN</a>
+        <a href="/Datauser">STUDENT LOGIN</a>
+    </div>
+</div>
+<!-- Notification Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="notification-container">
+      {% for category, message in messages %}
+        <div class="notification {{ category }}">
+            <span>{{ message }}</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="container">
+    <div class="title">
+        <i class="fas fa-user-tie"></i> Staff Registration
+    </div>
+
+    <form method="post" action="/rNewUser">
+
+        <div class="input-group">
+            <label>Full Name</label>
+            <div class="input-wrap">
+                <i class="fas fa-user"></i>
+                <input name="name" type="text" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Gender</label>
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Staff ID</label>
+            <div class="input-wrap">
+                <i class="fas fa-id-badge"></i>
+                <input name="staff_id" type="text" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Department</label>
+            <select name="department" required>
+                <option value="">Select Department</option>
+                <option>Mechanical</option>
+                <option>Civil</option>
+                <option>EEE</option>
+                <option>ECE</option>
+                <option>CSE</option>
+                <option>IT</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Designation</label>
+            <select name="designation" required>
+                <option value="">Select Designation</option>
+                <option>Assistant Professor</option>
+                <option>Associate Professor</option>
+                <!-- <option>Professor</option> -->
+                <option>Lab Instructor</option>
+            </select>
+        </div>
+
+        <!-- EMAIL OTP -->
+        <div class="input-group">
+            <label>Email ID</label>
+            <div class="otp-row">
+                <div class="input-wrap" style="flex:1">
+                    <i class="fas fa-envelope"></i>
+                    <input name="email" type="email" id="email" required>
+                </div>
+                <button type="button" class="otp-btn" onclick="sendOTP()">Send OTP</button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Enter OTP</label>
+            <div class="otp-row">
+                <div class="input-wrap" style="flex:1">
+                    <i class="fas fa-shield-halved"></i>
+                    <input type="text" id="otp">
+                </div>
+                <button type="button" class="otp-btn" onclick="verifyOTP()">Verify</button>
+            </div>
+            <div id="msg"></div>
+        </div>
+
+        <div class="input-group">
+            <label>Username</label>
+            <div class="input-wrap">
+                <i class="fas fa-user-circle"></i>
+                <input name="uname" type="text" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrap">
+                <i class="fas fa-key"></i>
+                <input name="password" type="password" required>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <input type="reset" value="Clear" class="reset-btn">
+            <input type="submit" id="registerBtn" value="Register Staff" class="submit-btn" disabled>
+        </div>
+
+    </form>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+<script>
+function sendOTP(){
+    let email = document.getElementById("email").value;
+
+    fetch("/send_otp",{
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:"email="+email
+    })
+    .then(res=>res.text())
+    .then(()=>{
+        document.getElementById("msg").innerHTML="<div class='success'>OTP Sent ✔</div>";
+    });
+}
+
+function verifyOTP(){
+    let otp = document.getElementById("otp").value;
+
+    fetch("/verify_otp",{
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:"otp="+otp
+    })
+    .then(res=>res.text())
+    .then(data=>{
+        if(data==="success"){
+            document.getElementById("msg").innerHTML="<div class='success'>Verified ✔</div>";
+            let btn=document.getElementById("registerBtn");
+            btn.disabled=false;
+            btn.classList.add("enabled");
+        }else{
+            document.getElementById("msg").innerHTML="<div class='error'>Wrong OTP ✖</div>";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

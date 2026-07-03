@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Student Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+}
+
+/* HEADER */
+.header{
+    background:#ffffff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+.logo span{
+    color:#d32f2f;
+}
+
+/* MENU */
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#222;
+    font-weight:600;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* CENTER */
+.center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+/* LOGIN CARD */
+.login-card{
+    width:400px;
+    background:#ffffff;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.08);
+    border:1px solid #eee;
+    transition:.3s;
+    animation:fadeIn .6s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.login-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 35px 70px rgba(0,0,0,0.12);
+}
+
+.login-card h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#0b3d91;
+    font-size:22px;
+}
+
+/* ERROR */
+.error{
+    background:#ffe5e5;
+    color:#b00020;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:18px;
+    text-align:center;
+    font-size:14px;
+    border:1px solid #ffb3b3;
+}
+
+/* INPUTS */
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-group label{
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:6px;
+    display:block;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#0b3d91;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px 12px 12px 40px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    outline:none;
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#0b3d91;
+    box-shadow:0 0 0 3px rgba(11,61,145,0.15);
+}
+
+/* BUTTON */
+.login-btn{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+.login-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* REGISTER */
+.register{
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+}
+
+.register a{
+    color:#0b3d91;
+    font-weight:700;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.register a:hover{
+    color:#d32f2f;
+}
+
+/* FOOTER */
+.footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+/* ================= NOTIFICATION SYSTEM ================= */
+
+.notification-container{
+    width:95%;
+    max-width:900px;
+    margin:20px auto;
+}
+
+.notification{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border-radius:10px;
+    margin-bottom:12px;
+    font-weight:600;
+    animation:slideDown .4s ease;
+}
+
+/* success */
+.notification.success{
+    background:#dcfce7;
+    color:#166534;
+    border-left:6px solid #22c55e;
+}
+
+/* warning */
+.notification.warning{
+    background:#fef9c3;
+    color:#854d0e;
+    border-left:6px solid #eab308;
+}
+
+/* error */
+.notification.danger{
+    background:#fee2e2;
+    color:#991b1b;
+    border-left:6px solid #ef4444;
+}
+
+/* close button */
+.close-btn{
+    background:none;
+    border:none;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    color:inherit;
+}
+
+/* animation */
+@keyframes slideDown{
+    from{
+        transform:translateY(-15px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/adminlogin">ADMIN</a>
+        <a href="/UserLogin">STAFF LOGIN</a>
+        <a href="/Datauser">STUDENT LOGIN</a>
+    </div>
+</div>
+<!-- Notification Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="notification-container">
+      {% for category, message in messages %}
+        <div class="notification {{ category }}">
+            <span>{{ message }}</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="center">
+    <form class="login-card" method="post" action="/datauserlogin">
+        <h2><i class="fas fa-user-graduate"></i> Student Login</h2>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <div class="input-group">
+            <label>Username</label>
+            <div class="input-wrap">
+                <i class="fas fa-user"></i>
+                <input type="text" name="uname" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrap">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" required>
+            </div>
+        </div>
+
+        <button class="login-btn" type="submit">
+            <i class="fas fa-right-to-bracket"></i> Login Securely
+        </button>
+
+        <div class="register">
+            New Student? <a href="/datauserregister">Register Here</a>
+        </div>
+    </form>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

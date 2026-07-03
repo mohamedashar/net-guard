@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – My Requests</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+    color:#0b3d91;
+}
+.logo span{color:#d32f2f;}
+
+.menu{display:flex;gap:22px;}
+.menu a{text-decoration:none;color:#222;font-weight:600;transition:.3s;}
+.menu a:hover{color:#0b3d91;}
+
+/* CONTAINER */
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:40px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 20px 45px rgba(0,0,0,0.08);
+}
+
+.title{
+    text-align:center;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:25px;
+    color:#0b3d91;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+
+th{
+    background:#0b3d91;
+    color:white;
+    padding:14px;
+    text-align:center;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+}
+
+tbody tr{
+    transition:.25s;
+}
+
+tbody tr:hover{
+    background:#f1f6ff;
+    transform:scale(1.01);
+}
+
+/* STATUS BADGES */
+.badge{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    color:white;
+}
+
+.waiting{ background:#f59e0b; }
+.accepted{ background:#16a34a; }
+.rejected{ background:#dc2626; }
+.revoked{ background:#6b7280; }
+
+/* DOWNLOAD BUTTON */
+.download-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 14px;
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.download-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/datauserhome">Dashboard</a>
+        <a href="/datauserfile">Request Material</a>
+        <a href="/datauserviewfile">My Requests</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="title">
+        <i class="fas fa-folder-open"></i> My Material Requests
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Staff</th>
+                <th>Status</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for item in data %}
+        <tr>
+            <td>{{item[0]}}</td>
+            <td><i class="fas fa-book"></i> {{item[2]}}</td>
+            <td>{{item[3]}}</td>
+            <td><i class="fas fa-chalkboard-teacher"></i> {{item[4]}}</td>
+
+            <td>
+                {% if item[9] == 'Waiting' %}
+                    <span class="badge waiting">Waiting</span>
+                {% elif item[9] == 'Accepted' %}
+                    <span class="badge accepted">Accepted</span>
+                {% elif item[9] == 'reject' %}
+                    <span class="badge rejected">Rejected</span>
+                {% elif item[9] == 'Revoked' %}
+                    <span class="badge revoked">Revoked</span>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if item[9] == 'Accepted' %}
+                    <a class="download-btn" href="/userdwonload1?pid={{item[0]}}">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

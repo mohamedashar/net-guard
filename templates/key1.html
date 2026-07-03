@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Secure Material Access</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ================= HEADER ================= */
+.header{
+    background:#ffffff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+.logo span{
+    color:#d32f2f;
+}
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#222;
+    font-weight:600;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* ================= CONTAINER ================= */
+.container{
+    width:95%;
+    max-width:520px;
+    margin:80px auto;
+    background:white;
+    padding:40px;
+    border-radius:22px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.08);
+    border:1px solid #eee;
+    transition:.3s;
+}
+
+.container:hover{
+    transform:translateY(-6px);
+    box-shadow:0 35px 80px rgba(0,0,0,0.12);
+}
+
+/* ================= TITLE ================= */
+.title{
+    text-align:center;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:10px;
+    color:#0b3d91;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:14px;
+    color:#555;
+    margin-bottom:25px;
+}
+
+/* ================= SECURITY NOTICE ================= */
+.notice{
+    background:#fff8e1;
+    border:1px solid #facc15;
+    color:#92400e;
+    padding:12px;
+    border-radius:12px;
+    font-size:13px;
+    margin-bottom:25px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+/* ================= INPUT ================= */
+.input-group{
+    margin-bottom:22px;
+}
+
+.input-group label{
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:6px;
+    display:block;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#0b3d91;
+}
+
+.input-group input{
+    width:100%;
+    padding:13px 12px 13px 40px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    outline:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#0b3d91;
+    box-shadow:0 0 0 3px rgba(11,61,145,0.15);
+}
+
+/* ================= BUTTONS ================= */
+.btn-group{
+    display:flex;
+    gap:12px;
+    justify-content:flex-end;
+}
+
+.reset-btn{
+    background:#94a3b8;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.submit-btn{
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+    transition:.3s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* ================= FOOTER ================= */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/datauserhome">Dashboard</a>
+        <a href="/datauserviewfile">My Requests</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+    <div class="title">
+        <i class="fas fa-lock"></i> Secure Material Access
+    </div>
+
+    <div class="subtitle">
+        Enter the access key provided by your staff to download approved study material.
+    </div>
+
+    <div class="notice">
+        <i class="fas fa-triangle-exclamation"></i>
+        Incorrect key attempts are recorded and reported to the staff member.
+    </div>
+
+    <form method="post" action="/fkey1">
+
+        <div class="input-group">
+            <label>Access Key</label>
+            <div class="input-wrap">
+                <i class="fas fa-shield-halved"></i>
+                <input name="filekey" type="text" required placeholder="Enter secure access key">
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <input type="reset" value="Clear" class="reset-btn">
+            <input type="submit" value="Verify & Download" class="submit-btn">
+        </div>
+
+    </form>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

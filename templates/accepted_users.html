@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:#f8fafc;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+    color:#0b3d91;
+}
+.logo span{color:#d32f2f;}
+
+.menu{
+    display:flex;
+    gap:20px;
+}
+.menu a{
+    text-decoration:none;
+    font-weight:600;
+    color:#222;
+    transition:.3s;
+}
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* CONTAINER */
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:40px auto;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    overflow:hidden;
+}
+
+.card-header{
+    padding:20px;
+    font-size:20px;
+    font-weight:700;
+    color:#0b3d91;
+    border-bottom:1px solid #eee;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead th{
+    background:#0b3d91;
+    color:white;
+    padding:14px;
+    text-align:left;
+}
+
+tbody td{
+    padding:13px;
+    border-bottom:1px solid #eee;
+}
+
+tbody tr{
+    transition:.25s;
+}
+tbody tr:hover{
+    background:#f1f6ff;
+    transform:scale(1.01);
+}
+
+/* BADGES */
+.badge{
+    background:#0b3d91;
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.status{
+    background:#2e7d32;
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* BUTTON */
+.remove-btn{
+    background:#d32f2f;
+    color:white;
+    padding:6px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:12px;
+    transition:.3s;
+}
+.remove-btn:hover{
+    background:#b71c1c;
+    box-shadow:0 8px 15px rgba(211,47,47,0.3);
+}
+
+.footer{
+    margin-top:auto;
+    text-align:center;
+    padding:20px;
+    background:#0f172a;
+    color:#cbd5e1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/userhome">Dashboard</a>
+        <a href="/fileupload">Upload Material</a>
+        <a href="/viewfile">View Materials</a>
+        <a href="/userrequest">Student Requests</a>
+        <a href="/accepted_users">Approved Students</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card-header">
+        Accepted Students Access List
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for item in data %}
+            <tr>
+                <td><span class="badge">{{item[0]}}</span></td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[7]}}</td>
+                <td>{{item[8]}}</td>
+                <td><span class="status">{{item[9]}}</span></td>
+                <td>
+                    <a class="remove-btn"
+                       href="/revoke?id={{item[0]}}"
+                       onclick="return confirm('Remove access?')">
+                        Remove
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

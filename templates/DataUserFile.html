@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Student Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{font-size:24px;font-weight:700;color:#0b3d91;}
+.logo span{color:#d32f2f;}
+
+.menu{display:flex;gap:22px;}
+.menu a{text-decoration:none;font-weight:600;color:#222;transition:.3s;}
+.menu a:hover{color:#0b3d91;}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:40px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 20px 45px rgba(0,0,0,0.08);
+}
+
+.title{
+    text-align:center;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:25px;
+    color:#0b3d91;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+
+th{
+    background:#0b3d91;
+    color:white;
+    padding:14px;
+    text-align:left;
+}
+
+td{
+    padding:13px;
+    border-bottom:1px solid #eee;
+}
+
+tbody tr:hover{
+    background:#f1f6ff;
+    transform:scale(1.01);
+    transition:.25s ease;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    color:white;
+    padding:8px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+/* ================= NOTIFICATION SYSTEM ================= */
+
+.notification-container{
+    width:95%;
+    max-width:900px;
+    margin:20px auto;
+}
+
+.notification{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border-radius:10px;
+    margin-bottom:12px;
+    font-weight:600;
+    animation:slideDown .4s ease;
+}
+
+/* success */
+.notification.success{
+    background:#dcfce7;
+    color:#166534;
+    border-left:6px solid #22c55e;
+}
+
+/* warning */
+.notification.warning{
+    background:#fef9c3;
+    color:#854d0e;
+    border-left:6px solid #eab308;
+}
+
+/* error */
+.notification.danger{
+    background:#fee2e2;
+    color:#991b1b;
+    border-left:6px solid #ef4444;
+}
+
+/* close button */
+.close-btn{
+    background:none;
+    border:none;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    color:inherit;
+}
+
+/* animation */
+@keyframes slideDown{
+    from{
+        transform:translateY(-15px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/datauserhome">Dashboard</a>
+        <a href="/datauserfile">Request Material</a>
+        <a href="/datauserviewfile">My Requests</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+<!-- Notification Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="notification-container">
+      {% for category, message in messages %}
+        <div class="notification {{ category }}">
+            <span>{{ message }}</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<div class="container">
+    <div class="title">
+        <i class="fas fa-book"></i> Available Study Materials
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Staff</th>
+                <th>Filename</th> <!-- NEW COLUMN -->
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for item in data %}
+        <tr>
+            <td>{{ item[0] }}</td>
+            <td><i class="fas fa-file-alt"></i> {{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td><i class="fas fa-chalkboard-teacher"></i> {{ item[3] }}</td>
+            <td><i class="fas fa-file"></i> {{ item[4] }}</td> <!-- SHOW FILENAME -->
+            <td>
+                <a class="btn" href="/Requestfile?pid={{ item[0] }}">
+                    <i class="fas fa-paper-plane"></i> Request Access
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Admin Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+    color:#0b3d91;
+}
+.logo span{color:#d32f2f;}
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    font-weight:600;
+    color:#222;
+    transition:.3s;
+}
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* CENTER */
+.center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+/* LOGIN CARD */
+.login-card{
+    width:400px;
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.08);
+    border:1px solid #eee;
+    animation:fadeIn 0.6s ease-in-out;
+    transition:.3s;
+}
+
+.login-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 30px 70px rgba(0,0,0,0.12);
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.login-card h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#0b3d91;
+    font-size:22px;
+}
+
+/* ERROR */
+.error{
+    background:#ffe5e5;
+    color:#b00020;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:18px;
+    text-align:center;
+    font-size:14px;
+    border:1px solid #ffb3b3;
+}
+
+/* INPUTS */
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-group label{
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:6px;
+    display:block;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#0b3d91;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px 12px 12px 40px;
+    border-radius:10px;
+    border:1px solid #d1d5db;
+    outline:none;
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#0b3d91;
+    box-shadow:0 0 0 3px rgba(11,61,145,0.15);
+}
+
+/* BUTTON */
+.login-btn{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+.login-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.18);
+}
+
+/* FOOTER */
+.footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/adminlogin">ADMIN</a>
+        <a href="/UserLogin">STAFF LOGIN</a>
+        <a href="/Datauser">STUDENT LOGIN</a>
+    </div>
+</div>
+
+<div class="center">
+    <form class="login-card" method="post" action="/adminlogin">
+        <h2><i class="fas fa-shield-halved"></i> Admin Portal Login</h2>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <div class="input-group">
+            <label>Username</label>
+            <div class="input-wrap">
+                <i class="fas fa-user"></i>
+                <input type="text" name="uname" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrap">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" required>
+            </div>
+        </div>
+
+        <button class="login-btn" type="submit">
+            <i class="fas fa-right-to-bracket"></i> Secure Login
+        </button>
+    </form>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

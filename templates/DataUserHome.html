@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD Student Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+.logo span{ color:#d32f2f; }
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#222;
+    font-weight:600;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* HERO */
+.hero{
+    width:95%;
+    max-width:1200px;
+    margin:30px auto;
+    background:linear-gradient(120deg,#0b3d91,#1e40af);
+    color:white;
+    padding:28px 35px;
+    border-radius:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.1);
+}
+
+.hero h1{
+    font-size:26px;
+}
+
+.hero p{
+    font-size:14px;
+    opacity:.9;
+}
+
+.user-badge{
+    background:white;
+    color:#0b3d91;
+    padding:8px 16px;
+    border-radius:25px;
+    font-weight:700;
+    font-size:13px;
+}
+
+/* PROFILE */
+.profile{
+    width:95%;
+    max-width:1200px;
+    margin:20px auto;
+    background:#ffffff;
+    padding:25px;
+    border-radius:16px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+    border:1px solid #eee;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.profile div{
+    font-size:14px;
+}
+
+.profile b{
+    display:block;
+    color:#0b3d91;
+    font-size:12px;
+    margin-bottom:4px;
+}
+
+/* ACTION CARDS */
+.actions{
+    width:95%;
+    max-width:1200px;
+    margin:30px auto 50px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+}
+
+.card{
+    background:#fff;
+    border-radius:18px;
+    padding:28px;
+    border:1px solid #eee;
+    box-shadow:0 15px 35px rgba(0,0,0,0.08);
+    transition:.3s;
+    text-align:center;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 50px rgba(0,0,0,0.15);
+}
+
+.icon{
+    width:65px;
+    height:65px;
+    margin:auto;
+    margin-bottom:15px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#0b3d91,#1e88e5);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.card h3{
+    margin-bottom:8px;
+    color:#0b3d91;
+}
+
+.card p{
+    font-size:13px;
+    color:#555;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/datauserhome">Dashboard</a>
+        <a href="/datauserfile">Request Material</a>
+        <a href="/datauserviewfile">My Requests</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <div>
+        <h1><i class="fas fa-user-graduate"></i> Student Dashboard</h1>
+        <p>Access academic study materials securely</p>
+    </div>
+    <div class="user-badge">
+        Verified Student
+    </div>
+</div>
+
+<!-- PROFILE -->
+{% for item in data %}
+<div class="profile">
+    <div>
+        <b>Name</b>
+        {{item[1]}}
+    </div>
+
+    <!-- <div>
+        <b>Gender</b>
+        {{item[2]}}
+    </div> -->
+
+    <div>
+        <b>Register Number</b>
+        {{item[3]}}
+    </div>
+
+    <div>
+        <b>Year of Study</b>
+        {{item[4]}}
+    </div>
+
+    <div>
+        <b>Department</b>
+        {{item[5]}}
+    </div>
+
+    <div>
+        <b>Email</b>
+        {{item[6]}}
+    </div>
+</div>
+{% endfor %}
+
+<!-- ACTIONS -->
+<div class="actions">
+
+    <a href="/datauserfile" style="text-decoration:none;color:inherit;">
+        <div class="card">
+            <div class="icon"><i class="fas fa-book"></i></div>
+            <h3>Request Materials</h3>
+            <p>Send request to staff for subject materials</p>
+        </div>
+    </a>
+
+    <a href="/datauserviewfile" style="text-decoration:none;color:inherit;">
+        <div class="card">
+            <div class="icon"><i class="fas fa-download"></i></div>
+            <h3>Download Materials</h3>
+            <p>Access approved academic materials</p>
+        </div>
+    </a>
+
+    <!-- <div class="card">
+        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Secure Access</h3>
+        <p>Key-based protected download system</p>
+    </div> -->
+
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

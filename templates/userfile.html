@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Staff File Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#e3f2fd);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#ffffff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+.logo span{ color:#d32f2f; }
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    font-weight:600;
+    color:#222;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* SPLASH */
+.splash{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.splash img{
+    width:100%;
+    border-radius:14px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* CONTAINER */
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:0 auto 60px auto;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    border:1px solid #eee;
+    overflow:hidden;
+}
+
+/* CARD HEADER */
+.card-header{
+    background:#f1f5f9;
+    padding:20px 30px;
+    font-size:22px;
+    font-weight:700;
+    color:#0b3d91;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* TABLE */
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+
+thead th{
+    background:#0b3d91;
+    color:white;
+    padding:14px 12px;
+    text-align:left;
+}
+
+tbody td{
+    padding:12px;
+    border-bottom:1px solid #edf2f7;
+}
+
+tbody tr{
+    transition:.25s;
+}
+
+tbody tr:hover{
+    background:#f4f9ff;
+}
+
+/* SERIAL BADGE */
+.badge{
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* DELETE BUTTON */
+.btn-delete{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-size:13px;
+    font-weight:600;
+    background:linear-gradient(90deg,#d32f2f,#ff5252);
+    transition:.3s;
+}
+
+.btn-delete:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 18px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/AdminHome">Dashboard</a>
+        <a href="/userfile">Staff Materials</a>
+        <a href="/userdetails">Student Details</a>
+        <a href="/viewattack">Security Logs</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<!-- <div class="splash">
+    <img src="static/images/1.jpg" alt="">
+</div> -->
+
+<div class="container">
+    <div class="card-header">
+        <i class="fas fa-file-arrow-up"></i> Staff Uploaded Study Materials
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Staff Name</th>
+                    <th>subject</th>
+                    <th>year</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    <td><span class="badge">{{item[0]}}</span></td>
+                    <td><i class="fas fa-user-tie"></i> {{item[3]}}</td>
+                    <td><i class="fas fa-file-lines"></i> {{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>
+                        <a class="btn-delete"
+                           href="/delete_file?id={{item[0]}}"
+                           onclick="return confirm('Remove this study material permanently?')">
+                           <i class="fas fa-trash"></i> Remove
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>

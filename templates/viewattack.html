@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD – Unauthorized Access Logs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#f8fafc,#eef2ff);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.06);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+.logo span{ color:#d32f2f; }
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    text-decoration:none;
+    font-weight:600;
+    color:#222;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#0b3d91;
+}
+
+/* SPLASH */
+.splash{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.splash img{
+    width:100%;
+    border-radius:14px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* CONTAINER */
+.container{
+    width:95%;
+    max-width:1250px;
+    margin:0 auto 60px auto;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    border:1px solid #eee;
+    overflow:hidden;
+}
+
+/* CARD HEADER */
+.card-header{
+    background:#fff4f4;
+    padding:20px 30px;
+    font-size:22px;
+    font-weight:700;
+    color:#d32f2f;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* FILTER BAR */
+.filter-bar{
+    display:flex;
+    gap:12px;
+    padding:15px 25px;
+    background:#f8fafc;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.filter-bar input{
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid #d1d5db;
+}
+
+.export-btn{
+    padding:8px 14px;
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* TABLE */
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+
+thead th{
+    background:#0b3d91;
+    color:white;
+    padding:14px 12px;
+    text-align:left;
+}
+
+tbody td{
+    padding:12px;
+    border-bottom:1px solid #edf2f7;
+}
+
+tbody tr:hover{
+    background:#fff7f7;
+}
+
+/* BADGES */
+.badge{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    color:white;
+}
+
+.badge-id{
+    background:linear-gradient(90deg,#0b3d91,#1e88e5);
+}
+
+.badge-high{ background:#d32f2f; }
+.badge-medium{ background:#f59e0b; }
+.badge-low{ background:#16a34a; }
+
+/* WARNING USER */
+.warning{
+    color:#d32f2f;
+    font-weight:700;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+
+/* EMPTY STATE */
+.empty{
+    text-align:center;
+    padding:30px;
+    color:#888;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+    <div class="menu">
+        <a href="/AdminHome">Dashboard</a>
+        <a href="/userfile">Staff Materials</a>
+        <a href="/userdetails">Student Details</a>
+        <a href="/viewattack">Security Logs</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<!-- <div class="splash">
+    <img src="static/images/1.jpg" alt="">
+</div> -->
+
+<div class="container">
+
+    <div class="card-header">
+        <div><i class="fas fa-shield-exclamation"></i> Unauthorized Access Attempts</div>
+    </div>
+
+    <!-- FILTER SECTION -->
+    <!-- <div class="filter-bar">
+        <input type="text" placeholder="Search username...">
+        <input type="date">
+        <button class="export-btn">
+            <i class="fas fa-file-export"></i> Export CSV
+        </button>
+    </div> -->
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Suspicious Username</th>
+                    <th>Email</th>
+                    <th>IP Address</th>
+                    <th>Date & Time</th>
+                    <th>Register number</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% if data %}
+            {% for item in data %}
+                <tr>
+                    <td><span class="badge badge-id">{{item[0]}}</span></td>
+                    <td class="warning">
+                        <i class="fas fa-user-lock"></i> {{item[1]}}
+                    </td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[6]}}</td>
+                    <td>{{item[7]}}</td>
+
+                    <!-- <td>
+                        {% if item[8] == 'High' %}
+                            <span class="badge badge-high">High</span>
+                        {% elif item[8] == 'Medium' %}
+                            <span class="badge badge-medium">Medium</span>
+                        {% else %}
+                            <span class="badge badge-low">Low</span>
+                        {% endif %}
+                    </td> -->
+                </tr>
+            {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="7" class="empty">
+                        <i class="fas fa-shield-check"></i> No unauthorized access attempts recorded.
+                    </td>
+                </tr>
+            {% endif %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div class="footer">
+    © 2026 NETGUARD – College Academic Security Portal
+</div>
+
+</body>
+</html>
+

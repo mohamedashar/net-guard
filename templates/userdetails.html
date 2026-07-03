@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NETGUARD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#ffffff;
+    color:#111;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ================= HEADER ================= */
+.header{
+    background:#fff;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.06);
+    position:sticky;
+    top:0;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:#0b3d91;
+}
+
+.logo span{
+    color:#d32f2f;
+}
+
+/* ================= MENU ================= */
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    position:relative;
+    text-decoration:none;
+    color:#222;
+    font-weight:600;
+    padding:6px 2px;
+    transition:.3s;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:3px;
+    left:0;
+    bottom:-6px;
+    background:linear-gradient(90deg,#0b3d91,#ffd60a);
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#0b3d91;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+/* ================= SPLASH ================= */
+.splash{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.splash img{
+    width:100%;
+    border-radius:14px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* ================= CONTAINER ================= */
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:0 auto 50px auto;
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    border:1px solid #eee;
+}
+
+.title{
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:20px;
+    color:#0b3d91;
+}
+
+/* ================= TABLE ================= */
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+}
+
+th{
+    background:#0b3d91;
+    color:white;
+    padding:14px 12px;
+    text-align:left;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #edf2f7;
+}
+
+tbody tr{
+    transition:.25s;
+}
+
+tbody tr:hover{
+    background:#f8fbff;
+    transform:scale(1.01);
+}
+
+td i{
+    margin-right:6px;
+    color:#0b3d91;
+}
+
+/* ================= DELETE BUTTON ================= */
+.delete-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:linear-gradient(90deg,#d32f2f,#ef5350);
+    color:white;
+    padding:7px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.delete-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 18px rgba(0,0,0,0.15);
+}
+
+/* ================= FOOTER ================= */
+.footer{
+    margin-top:auto;
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">NET<span>GUARD</span></div>
+
+    <div class="menu">
+        <a href="/AdminHome">Dashboard</a>
+        <a href="/userfile">Staff Materials</a>
+        <a href="/userdetails">Student Details</a>
+        <a href="/viewattack">Security Logs</a>
+        <a href="/">Logout</a>
+    </div>
+</div>
+
+<!-- SPLASH -->
+<!-- <div class="splash">
+    <img src="static/images/1.jpg" alt="">
+</div> -->
+
+<!-- CONTENT -->
+<div class="container">
+    <div class="title">
+        <i class="fas fa-users"></i> Registered Data Users
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>register no</th>
+                    <th>year of study</th>
+                    <th>department</th>
+                    <th>email id    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td><i class="fas fa-user"></i>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td>{{item[6]}}</td>
+                <td>
+                    <a class="delete-btn"
+                       href="/delete_user?id={{item[0]}}"
+                       onclick="return confirm('Delete this user?')">
+                       <i class="fas fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 NETGUARD – Security Operations
+</div>
+
+</body>
+</html>
